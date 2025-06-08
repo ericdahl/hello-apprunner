@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+Run `terraform plan` to ensure Terraform syntax is valid and resulting Plan is what you expect
