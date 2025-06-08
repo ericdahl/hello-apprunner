@@ -29,10 +29,6 @@ resource "aws_apprunner_service" "default" {
 
   instance_configuration {
     cpu    = "256"
-    memory = "1024"
+    memory = "512"
   }
 }
-
-
-
-
