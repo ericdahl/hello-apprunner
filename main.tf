@@ -10,7 +10,7 @@ provider "aws" {
 data "aws_default_tags" "default" {}
 
 locals {
-    name = data.aws_default_tags.default.tags.Name
+  name = data.aws_default_tags.default.tags.Name
 }
 
 resource "aws_apprunner_observability_configuration" "xray" {
@@ -49,7 +49,7 @@ resource "aws_apprunner_service" "default" {
   }
 
   observability_configuration {
-    observability_enabled = true
+    observability_enabled           = true
     observability_configuration_arn = aws_apprunner_observability_configuration.xray.arn
   }
 
