@@ -13,6 +13,13 @@ locals {
     name = data.aws_default_tags.default.tags.Name
 }
 
+resource "aws_apprunner_observability_configuration" "xray" {
+  observability_configuration_name = "${local.name}-xray"
+  trace_configuration {
+    vendor = "AWSXRAY"
+  }
+}
+
 resource "aws_apprunner_service" "default" {
   service_name = local.name
 
@@ -39,6 +46,11 @@ resource "aws_apprunner_service" "default" {
     unhealthy_threshold = 5
     timeout             = 5
     interval            = 10
+  }
+
+  observability_configuration {
+    observability_enabled = true
+    observability_configuration_arn = aws_apprunner_observability_configuration.xray.arn
   }
 
   auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.default.arn
