@@ -32,6 +32,15 @@ resource "aws_apprunner_service" "default" {
     memory = "512"
   }
 
+  health_check_configuration {
+    path                = "/"
+    protocol            = "HTTP"
+    healthy_threshold   = 1
+    unhealthy_threshold = 5
+    timeout             = 5
+    interval            = 10
+  }
+
   auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.default.arn
 }
 
