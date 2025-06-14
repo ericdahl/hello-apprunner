@@ -31,4 +31,13 @@ resource "aws_apprunner_service" "default" {
     cpu    = "256"
     memory = "512"
   }
+
+  auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.default.arn
+}
+
+resource "aws_apprunner_auto_scaling_configuration_version" "default" {
+  auto_scaling_configuration_name = "${local.name}-autoscaling"
+  max_size                        = 3
+  min_size                        = 1
+  max_concurrency                 = 100
 }
